@@ -1,0 +1,11 @@
+region                 = "eu-west-1"
+project_name           = "secure-platform"
+github_org             = "momenckhouse-dev"
+terraform_state_bucket = "your-tfstate-bucket"
+
+# Lab mode: one NAT gateway and small nodes to keep the bill down.
+single_nat_gateway  = true
+node_instance_types = ["t3.large"]
+
+cluster_endpoint_public_access_cidrs = ["203.0.113.10/32"]
+cluster_admin_principal_arns         = ["arn:aws:iam::111122223333:role/Admin"]

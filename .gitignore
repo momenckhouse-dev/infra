@@ -1,0 +1,20 @@
+# Provider/module cache (hundreds of MB, rebuilt by terraform init)
+.terraform/
+
+# State can contain secrets and is stored in S3, never in Git
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# Plans can contain secrets
+*.tfplan
+tfplan
+plan.txt
+
+# Real values for your account stay local; the *.example files are committed
+terraform.tfvars
+*.auto.tfvars
+backend.hcl
+
+# .terraform.lock.hcl is intentionally NOT ignored: it pins provider versions and hashes

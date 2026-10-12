@@ -1,0 +1,13 @@
+# Accepted risks. Every entry needs a reason and a compensating control; review quarterly.
+
+# AWS-0040 Public EKS API endpoint enabled.
+# Reason: no VPN/bastion in this environment; operators run kubectl from their workstation.
+# Control: cluster_endpoint_public_access_cidrs is mandatory, rejects 0.0.0.0/0, and every
+#          request still needs IAM authentication plus an EKS access entry.
+# Exit plan: private-only endpoint behind Client VPN when the platform goes multi-team.
+AWS-0040
+
+# AWS-0104 Node security group allows all egress.
+# Reason: nodes must reach ECR, STS, EKS and S3 endpoints and pull public images through NAT.
+# Control: workloads are restricted per pod by NetworkPolicy (DNS + 443 only); VPC flow logs on.
+AWS-0104
