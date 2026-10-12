@@ -104,6 +104,18 @@ variable "infra_repo" {
   default     = "infra"
 }
 
+variable "github_owner_id" {
+  description = "Numeric ID of the GitHub user/org. Set it (with github_repo_ids) when GitHub issues immutable OIDC subjects like repo:org@123/name@456."
+  type        = string
+  default     = ""
+}
+
+variable "github_repo_ids" {
+  description = "Numeric GitHub repository IDs keyed by repo name, used for immutable OIDC subjects."
+  type        = map(string)
+  default     = {}
+}
+
 variable "create_github_oidc_provider" {
   description = "Set false if the account already has the token.actions.githubusercontent.com provider."
   type        = bool

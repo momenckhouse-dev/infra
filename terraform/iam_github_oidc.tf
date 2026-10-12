@@ -12,14 +12,23 @@ data "aws_iam_openid_connect_provider" "github" {
 
 locals {
   github_oidc_provider_arn = var.create_github_oidc_provider ? aws_iam_openid_connect_provider.github[0].arn : data.aws_iam_openid_connect_provider.github[0].arn
+
+  # Immutable subjects embed numeric IDs so a deleted-and-recreated repo with the same name can't assume these roles.
+  github_repo_subject = {
+    for repo in [var.app_repo, var.infra_repo] : repo => (
+      var.github_owner_id != "" && lookup(var.github_repo_ids, repo, "") != ""
+      ? "repo:${var.github_org}@${var.github_owner_id}/${repo}@${var.github_repo_ids[repo]}"
+      : "repo:${var.github_org}/${repo}"
+    )
+  }
 }
 
 # Trust policy factory: one role per (repo, ref/environment) subject, never a wildcard org.
 data "aws_iam_policy_document" "github_trust" {
   for_each = {
-    ci_ecr_push     = "repo:${var.github_org}/${var.app_repo}:ref:refs/heads/main"
-    terraform_plan  = "repo:${var.github_org}/${var.infra_repo}:pull_request"
-    terraform_apply = "repo:${var.github_org}/${var.infra_repo}:environment:production-infra"
+    ci_ecr_push     = "${local.github_repo_subject[var.app_repo]}:ref:refs/heads/main"
+    terraform_plan  = "${local.github_repo_subject[var.infra_repo]}:pull_request"
+    terraform_apply = "${local.github_repo_subject[var.infra_repo]}:environment:production-infra"
   }
 
   statement {
