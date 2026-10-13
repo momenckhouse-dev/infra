@@ -1,7 +1,7 @@
 variable "region" {
   description = "AWS region for the platform."
   type        = string
-  default     = "eu-west-1"
+  default     = "eu-central-1"
 }
 
 variable "project_name" {
@@ -61,9 +61,10 @@ variable "cluster_admin_principal_arns" {
 }
 
 variable "node_instance_types" {
+  # m7i-flex.large (2 vCPU / 8 GiB) is free-tier eligible, so it launches on the AWS Free plan (t3.large was rejected).
   description = "Instance types for the managed node group."
   type        = list(string)
-  default     = ["m6i.large"]
+  default     = ["m7i-flex.large"]
 }
 
 variable "node_min_size" {
