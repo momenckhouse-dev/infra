@@ -11,7 +11,8 @@ Built and run in AWS `eu-central-1` in October 2026: EKS 1.33 with 3 × m7i-flex
 GitHub OIDC roles and the Crossplane role. The whole platform ran on it end to end (CI to ECR, Argo CD,
 Crossplane, monitoring, an incident exercise and an approval-gated production release); the evidence
 is linked from the [gitops-config README](https://github.com/momenckhouse-dev/gitops-config#status-built-deployed-and-exercised-october-2026).
-The lab is destroyed after the demo to save cost, so the code and that evidence are what remain.
+The lab was destroyed on 2026-10-13 (`terraform destroy`: 92 resources, after Crossplane's buckets
+and roles and the monitoring volumes were removed first), so the code and that evidence are what remain.
 
 Two problems found while building it, both fixed in this repo:
 
