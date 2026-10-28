@@ -15,4 +15,4 @@ cluster_admin_principal_arns         = ["arn:aws:iam::111122223333:user/your-adm
 # Needed when GitHub issues immutable OIDC subjects (it did for this project).
 # Find the IDs with: gh api repos/OWNER/REPO/actions/oidc/customization/sub, gh api users/OWNER --jq .id
 # github_owner_id = "12345678"
-# github_repo_ids = { "app-source" = "1000000001", "infra" = "1000000002" }
+# github_repo_ids = { "secure-event-api" = "1000000001", "infra" = "1000000002" }

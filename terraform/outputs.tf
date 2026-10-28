@@ -19,7 +19,7 @@ output "ecr_repository_urls" {
 }
 
 output "github_ci_role_arn" {
-  description = "Set as the AWS_CI_ROLE_ARN variable in the app-source repo."
+  description = "Set as the AWS_CI_ROLE_ARN variable in the secure-event-api repo."
   value       = aws_iam_role.github_ci_ecr_push.arn
 }
 
