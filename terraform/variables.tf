@@ -96,7 +96,7 @@ variable "github_org" {
 variable "app_repo" {
   description = "Application source repository allowed to push images."
   type        = string
-  default     = "app-source"
+  default     = "secure-event-api"
 }
 
 variable "infra_repo" {
